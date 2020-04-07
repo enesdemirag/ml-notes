@@ -1,2 +1,4 @@
 # ml-notes
-My Computer Vision Notes
+My Machine Learning Notes
+
+```Machine Learning Crash Course with TensorFlow APIs``` by [Google](https://developers.google.com/machine-learning/crash-course)
