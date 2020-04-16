@@ -10,8 +10,8 @@ from matplotlib import pyplot as plt
 pd.options.display.max_rows = 10
 pd.options.display.float_format = "{:.1f}".format
 
-train_df = pd.read_csv("california-housing-train.csv")
-test_df = pd.read_csv("california-housing-test.csv")
+train_df = pd.read_csv("../datasets/california-housing-train.csv")
+test_df = pd.read_csv("../datasets/california-housing-test.csv")
 
 # Scale the label values
 scale_factor = 1000.0

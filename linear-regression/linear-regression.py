@@ -92,7 +92,7 @@ pd.options.display.max_rows = 10
 pd.options.display.float_format = "{:.1f}".format
 
 # Import the dataset.
-training_df = pd.read_csv(filepath_or_buffer="california-housing-dataset.csv")
+training_df = pd.read_csv(filepath_or_buffer="../datasets/california-housing-dataset.csv")
 
 # Scale the label.
 training_df["median_house_value"] /= 1000.0 # Scaling label values is not essential.
