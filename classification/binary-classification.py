@@ -78,6 +78,7 @@ def plot_curve(epochs, hist, list_of_metrics):
         plt.plot(epochs[1:], x[1:], label=m)
 
     plt.legend()
+    plt.show()
 
 # Hyperparameters
 learning_rate = 0.001
@@ -103,6 +104,7 @@ label = np.array(features.pop(label_name))
 classifier.evaluate(x = features, y = label, batch_size=batch_size)
 
 # Task 2: Add precision and recall as metrics
+epochs = 20
 
 METRICS = [
             tf.keras.metrics.BinaryAccuracy(name='accuracy', threshold=classification_threshold),
@@ -118,6 +120,7 @@ list_of_metrics_to_plot = ['accuracy', "precision", "recall"]
 plot_curve(epochs, hist, list_of_metrics_to_plot)
 
 # Task 3: Summary using Area under the Receiver Operated Characteristic (ROC) Curve (AUC)
+epochs = 20
 
 METRICS = [
       tf.keras.metrics.AUC(num_thresholds=100, name='auc'),
