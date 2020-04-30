@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 
-df = pd.read_csv("../datasets/california-housing-dataset.csv")
+df = pd.read_csv("california-housing-dataset.csv")
 
 df["median_house_value"] /= 500001
 
