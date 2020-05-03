@@ -86,13 +86,12 @@ def train_model(model, dataset, epochs, batch_size, label_name):
 
 # Train Nonlinear Model with feature crosses
 learning_rate = 0.01
-epochs = 20
 batch_size = 1000
 label_name = "median_house_value"
 
 first_model = create_model(learning_rate, feature_layer)
 
-epochs, mse = train_model(first_model, train_df_norm, epochs, batch_size, label_name)
+epochs, mse = train_model(first_model, train_df_norm, 20, batch_size, label_name)
 plot_the_loss_curve(epochs, mse)
 
 test_features = {name:np.array(value) for name, value in test_df_norm.items()}
@@ -133,7 +132,7 @@ def train_nn_model(model, dataset, epochs, label_name, batch_size=None):
 # Train Neural Network Model
 nn_model = create_nn_model(learning_rate, feature_layer)
 
-epochs, mse = train_nn_model(nn_model, train_df_norm, epochs, label_name, batch_size)
+epochs, mse = train_nn_model(nn_model, train_df_norm, 20, label_name, batch_size)
 plot_the_loss_curve(epochs, mse)
 
 nn_model.evaluate(x = test_features, y = test_label, batch_size=batch_size)
