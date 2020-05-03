@@ -5,7 +5,6 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow.keras import layers
 from matplotlib import pyplot as plt
-import seaborn as sns
 pd.options.display.max_rows = 10
 pd.options.display.float_format = "{:.1f}".format
 
@@ -34,11 +33,11 @@ resolution_Z = 0.3
 latitude_as_a_numeric_column = tf.feature_column.numeric_column("latitude")
 longitude_as_a_numeric_column = tf.feature_column.numeric_column("longitude")
 
-latitude_boundaries = list(np.arange(int(min(train_df_norm['latitude'])), 
-                                    int(max(train_df_norm['latitude'])), 
+latitude_boundaries = list(np.arange(int(min(train_df_norm['latitude'])),
+                                    int(max(train_df_norm['latitude'])),
                                     resolution_Z))
-longitude_boundaries = list(np.arange(int(min(train_df_norm['longitude'])), 
-                                    int(max(train_df_norm['longitude'])), 
+longitude_boundaries = list(np.arange(int(min(train_df_norm['longitude'])),
+                                    int(max(train_df_norm['longitude'])),
                                     resolution_Z))
 
 latitude = tf.feature_column.bucketized_column(latitude_as_a_numeric_column, latitude_boundaries)
@@ -49,7 +48,7 @@ crossed_feature = tf.feature_column.indicator_column(latitude_x_longitude)
 median_income = tf.feature_column.numeric_column("median_income")
 population = tf.feature_column.numeric_column("population")
 
-feature_columns.append(crossed_feature)  
+feature_columns.append(crossed_feature)
 feature_columns.append(median_income)
 feature_columns.append(population)
 
@@ -63,7 +62,7 @@ def plot_the_loss_curve(epochs, mse):
 
     plt.plot(epochs, mse, label="Loss")
     plt.legend()
-    plt.ylim([mse.min()*0.95, mse.max() * 1.03])
+    plt.ylim([mse.min() * 0.95, mse.max() * 1.03])
     plt.show()
 
 def create_model(learning_rate, feature_layer):
@@ -87,7 +86,7 @@ def train_model(model, dataset, epochs, batch_size, label_name):
 
 # Train Nonlinear Model with feature crosses
 learning_rate = 0.01
-epochs = 15
+epochs = 20
 batch_size = 1000
 label_name = "median_house_value"
 
@@ -132,18 +131,9 @@ def train_nn_model(model, dataset, epochs, label_name, batch_size=None):
     return epochs, mse
 
 # Train Neural Network Model
-learning_rate = 0.01
-epochs = 20
-batch_size = 1000
-
-label_name = "median_house_value"
-
 nn_model = create_nn_model(learning_rate, feature_layer)
 
 epochs, mse = train_nn_model(nn_model, train_df_norm, epochs, label_name, batch_size)
 plot_the_loss_curve(epochs, mse)
-
-test_features = {name:np.array(value) for name, value in test_df_norm.items()}
-test_label = np.array(test_features.pop(label_name))        # isolate the label
 
 nn_model.evaluate(x = test_features, y = test_label, batch_size=batch_size)
