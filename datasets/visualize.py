@@ -10,7 +10,7 @@ longitude = list(df["longitude"])
 latitude = list(df["latitude"])
 prices = list(df["median_house_value"])
 
-plt.scatter(x = longitude, y = latitude, s=4, c = prices, cmap='rainbow')
+plt.scatter(x = longitude, y = latitude, s = 4, c = prices, cmap='rainbow')
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.show()
